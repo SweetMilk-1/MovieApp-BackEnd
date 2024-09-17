@@ -1,14 +1,19 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MovieApp.Arch.MediatR;
 using MovieApp.Database;
 using MovieApp.Handlers;
 using MovieApp.Infrastucture.Controller;
 using MovieApp.Services;
 using System.Net.NetworkInformation;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +24,25 @@ builder.Services.AddControllers(
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+//Add authentication and authorization
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration.GetValue<string>("Security:Jwt:Issuer"),
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration.GetValue<string>("Security:Jwt:Audience"),
+            ValidateLifetime = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                builder.Configuration.GetValue<string>("Security:Jwt:Key"))),
+            ValidateIssuerSigningKey = true,
+        };
+    });
 
 //Add MovieAppDbContext
 builder.Services.AddDbContext<MovieAppDbContext>(options =>

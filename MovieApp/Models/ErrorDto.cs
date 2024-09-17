@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Models.Dto
+﻿namespace MovieApp.Models
 {
     public class ErrorDto
     {
