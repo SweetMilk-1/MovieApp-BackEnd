@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace MovieApp.Handlers.Genre.GetList
+namespace MovieApp.Handlers.Actors.GetList
 {
-    public class GetGenresListRequestValidator : AbstractValidator<GetGenresListRequest>
+    public class GetActorsListRequestValidator : AbstractValidator<GetActorsListRequest>
     {
-        public GetGenresListRequestValidator() 
+        public GetActorsListRequestValidator()
         {
             RuleFor(x => x.Page)
                 .GreaterThan(0)

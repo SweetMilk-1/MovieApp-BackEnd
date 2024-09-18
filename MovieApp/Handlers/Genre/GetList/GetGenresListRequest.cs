@@ -7,7 +7,6 @@ namespace MovieApp.Handlers.Genre.GetList
     {
         public string? Search { get; set; }
         public int PerPage { get; set; } = 1000;
-    
         public int Page { get; set;} = 1;
     }
 }
