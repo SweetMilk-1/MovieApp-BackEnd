@@ -14,7 +14,6 @@ namespace MovieApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateActorRequets requets)
         {
-            requets.Id = null;
             await MediatR.Send(requets);
             return Created();
         }

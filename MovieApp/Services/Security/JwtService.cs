@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using MovieApp.Models.Dto;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -14,13 +15,14 @@ namespace MovieApp.Services.Security
             _configuration = configuration;
         }
 
-        public string CreateAccessToken(string login, bool isAdmin, Guid sessionId)
+        public string CreateAccessToken(UserJwtInfoDto userJwtInfo)
         {
             var claims = new List<Claim>
             {
-                new Claim("Login", login),
-                new Claim("IsAdmin", isAdmin.ToString()),
-                new Claim("SessionId", sessionId.ToString())
+                new Claim("UserId", userJwtInfo.UserId.ToString()),
+                new Claim("Login", userJwtInfo.Login),
+                new Claim("IsAdmin", userJwtInfo.IsAdmin.ToString()),
+                new Claim("SessionId", userJwtInfo.sessionId.ToString())
             };
 
             var expiredTime = _configuration.GetValue<int>("Security:Jwt:AccessExpiredTime");

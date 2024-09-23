@@ -1,8 +1,10 @@
-﻿namespace MovieApp.Services.Security
+﻿using MovieApp.Models.Dto;
+
+namespace MovieApp.Services.Security
 {
     public interface IJwtService
     {
-        string CreateAccessToken(string login, bool isAdmin, Guid sessionId);
+        string CreateAccessToken(UserJwtInfoDto userJwtInfo);
         string CreateRefreshToken(Guid sessionId);
     }
 }

@@ -12,6 +12,7 @@ namespace MovieApp.Database
         public DbSet<UserSession> UserSessions => Set<UserSession>();
         public DbSet<Genre> Genres => Set<Genre>();
         public DbSet<Actor> Actors => Set<Actor>();
+        public DbSet<Movie> Movies => Set<Movie>();
 
     }
 }
