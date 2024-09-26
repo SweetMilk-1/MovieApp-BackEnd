@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Models
+﻿namespace MovieApp.Models.Common
 {
     public class DictionaryItemDto
     {

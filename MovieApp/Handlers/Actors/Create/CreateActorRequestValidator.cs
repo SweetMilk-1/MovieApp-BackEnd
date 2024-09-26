@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MovieApp.Models.Dto;
-using MovieApp.Models.DtoValidators;
 
 namespace MovieApp.Handlers.Actors.Create
 {

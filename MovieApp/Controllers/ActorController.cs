@@ -1,23 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieApp.Handlers.Actors.Create;
 using MovieApp.Handlers.Actors.Delete;
 using MovieApp.Handlers.Actors.Get;
 using MovieApp.Handlers.Actors.GetList;
 using MovieApp.Handlers.Actors.Update;
 using MovieApp.Infrastucture.Controller;
+using MovieApp.Infrastucture.Controller.Auth;
 
 namespace MovieApp.Controllers
 {
     [Route("Actor")]
+    
     public class ActorController : BaseController
     {
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateActorRequets requets)
-        {
-            await MediatR.Send(requets);
-            return Created();
-        }
-
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> Get([FromRoute] GetActorRequest requets)
         {
@@ -31,8 +27,16 @@ namespace MovieApp.Controllers
             return Ok(await MediatR.Send(requets));
         }
 
+        [HttpPost]
+        [CustomAuthorizationFilter(isAdmin: true)]
+        public async Task<IActionResult> Create([FromBody] CreateActorRequets requets)
+        {
+            await MediatR.Send(requets);
+            return Created();
+        }
 
         [HttpPut("{id:guid}")]
+        [CustomAuthorizationFilter(isAdmin: true)]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateActorRequest requets)
         {
             requets.Id = id;
@@ -41,6 +45,7 @@ namespace MovieApp.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [CustomAuthorizationFilter(isAdmin: true)]
         public async Task<IActionResult> Delete([FromRoute] DeleteActorRequest requets)
         {
             await MediatR.Send(requets);

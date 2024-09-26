@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MovieApp.Database;
-using MovieApp.Models;
+using MovieApp.Models.Common;
 
 namespace MovieApp.Handlers.Genre.GetList
 {

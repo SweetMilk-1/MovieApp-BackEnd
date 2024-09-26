@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MovieApp.Infrastucture.Exceptions;
-using MovieApp.Models;
+using MovieApp.Models.Common;
 using System.Net;
 
 namespace MovieApp.Infrastucture.Controller;

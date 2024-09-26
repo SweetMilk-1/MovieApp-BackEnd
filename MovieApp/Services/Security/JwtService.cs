@@ -22,7 +22,7 @@ namespace MovieApp.Services.Security
                 new Claim("UserId", userJwtInfo.UserId.ToString()),
                 new Claim("Login", userJwtInfo.Login),
                 new Claim("IsAdmin", userJwtInfo.IsAdmin.ToString()),
-                new Claim("SessionId", userJwtInfo.sessionId.ToString())
+                new Claim("SessionId", userJwtInfo.SessionId.ToString())
             };
 
             var expiredTime = _configuration.GetValue<int>("Security:Jwt:AccessExpiredTime");
@@ -59,8 +59,8 @@ namespace MovieApp.Services.Security
                 audience: audience,
                 notBefore: now,
                 expires: now.Add(TimeSpan.FromMinutes(expiredTime)),
-                signingCredentials: signingCredentials
-                );
+                signingCredentials: signingCredentials,
+                claims: claims);
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
             return encodedJwt;

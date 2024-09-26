@@ -1,4 +1,5 @@
 ﻿using MovieApp.Database.Entities;
+using MovieApp.Models.Common;
 
 namespace MovieApp.Models.Dto
 {
@@ -8,6 +9,7 @@ namespace MovieApp.Models.Dto
         public string Title { get; set; }
         public string Description { get; set; }
         public string PgInfo { get; set; }
+        public int? DurationInMinutes { get; set; }
         public DateTime ReleaseDate { get; set; }
         public IEnumerable<DictionaryItemDto>? Actors { get; set; }
         public IEnumerable<DictionaryItemDto>? Genres { get; set; }

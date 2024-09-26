@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MovieApp.Database.Entities;
-using MovieApp.Models;
+using MovieApp.Models.Common;
 using MovieApp.Models.Dto;
 
 namespace MovieApp.Mappers

@@ -12,7 +12,9 @@ namespace MovieApp.Mappers
             CreateMap<MovieDto, Movie>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(x => x.CreatedByUserId, opt => opt.Ignore())
-                .ForMember(x => x.CreatedAt, opt => opt.Ignore());
+                .ForMember(x => x.CreatedAt, opt => opt.Ignore())
+                .ForMember(x => x.Genres, opt => opt.Ignore())
+                .ForMember(x => x.Actors, opt => opt.Ignore());
 
             CreateMap<Movie, MovieItemDto>();
         }

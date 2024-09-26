@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieApp.Database;
 using MovieApp.Models.Dto;
 
-namespace MovieApp.Models.DtoValidators
+namespace MovieApp.Models.Validators
 {
     public class ActorDtoValidator : AbstractValidator<ActorDto>
     {
@@ -29,7 +29,7 @@ namespace MovieApp.Models.DtoValidators
 
         private async Task<bool> IsNameUnique(ActorDto dto, CancellationToken token)
         {
-            return dto.Id == null 
+            return dto.Id == null
                 ? !await _dbContext.Actors.AnyAsync(x => x.Name == dto.Name)
                 : !await _dbContext.Actors.AnyAsync(x => x.Name == dto.Name && x.Id != dto.Id);
         }

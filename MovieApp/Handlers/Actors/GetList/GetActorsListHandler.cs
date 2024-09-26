@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MovieApp.Database;
 using MovieApp.Database.Extensions;
-using MovieApp.Models;
+using MovieApp.Models.Common;
 
 namespace MovieApp.Handlers.Actors.GetList
 {

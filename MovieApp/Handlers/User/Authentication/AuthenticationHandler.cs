@@ -24,17 +24,18 @@ namespace MovieApp.Handlers.User.Authentication
         public async Task<AuthenticationResponse> Handle(AuthenticationRequest request, CancellationToken cancellationToken)
         {
             var user = await _dbContext.Users.AsNoTracking()
-                .FirstOrDefaultAsync(x => 
-                    x.Login == request.Login 
+                .FirstOrDefaultAsync(x =>
+                    x.Login == request.Login
                     && x.PasswordHash == _cryptoService.GetHashFromString(request.Password)
                     && x.IsApproved);
 
-            if (user == null) {
+            if (user == null)
+            {
                 throw new BadRequestException("Неправльный логин или пароль");
             }
 
             var sessionId = Guid.NewGuid();
-            var accessToken = _jwtService.CreateAccessToken(user.Login, user.IsAdmin, sessionId);
+            var accessToken = _jwtService.CreateAccessToken(new Models.Dto.UserJwtInfoDto(user.Id, user.Login, user.IsAdmin, sessionId));
             var refreshToken = _jwtService.CreateRefreshToken(sessionId);
             await _sessionService.SetSessionId(user.Id, sessionId);
 

@@ -1,19 +1,14 @@
 ﻿using FluentValidation;
+using MovieApp.Models.Interfaces;
 
 namespace MovieApp.Handlers.Genre.GetList
 {
     public class GetGenresListRequestValidator : AbstractValidator<GetGenresListRequest>
     {
-        public GetGenresListRequestValidator() 
+        public GetGenresListRequestValidator(IValidator<IPagedRequest> validator) 
         {
-            RuleFor(x => x.Page)
-                .GreaterThan(0)
-                .WithMessage("Номер страницы должен быть больше нуля");
-
-
-            RuleFor(x => x.PerPage)
-                .GreaterThan(0)
-                .WithMessage("Количество записей на странице должно быть больше нуля");
+            RuleFor(x => x)
+                .SetValidator(validator);
         }
     }
 }

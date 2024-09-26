@@ -1,4 +1,5 @@
 ﻿using MovieApp.Services.Security;
+using MovieApp.Services.User;
 
 namespace MovieApp.Services
 {
@@ -10,6 +11,7 @@ namespace MovieApp.Services
             services.AddTransient<ICryptoService, CryptoService>();
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<ISessionService, SessionService>();
+            services.AddTransient<IUserInfoService, UserInfoService>();
 
             return services;
         }
