@@ -6,7 +6,7 @@ using MovieApp.Services.User;
 
 namespace MovieApp.Handlers.Movie.Create
 {
-    public class CreateMovieHandler : IRequestHandler<CreateMovieRequest>
+    public class CreateMovieHandler : IRequestHandler<CreateMovieRequest, Guid>
     {
         private readonly IMapper _mapper;
         private readonly MovieAppDbContext _context;
@@ -20,7 +20,7 @@ namespace MovieApp.Handlers.Movie.Create
             _userInfoService = userInfoService;
         }
 
-        public async Task Handle(CreateMovieRequest request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateMovieRequest request, CancellationToken cancellationToken)
         {
             var movie = _mapper.Map<Database.Entities.Movie>(request);
 
@@ -40,6 +40,7 @@ namespace MovieApp.Handlers.Movie.Create
             _context.Add(movie);
 
             await _context.SaveChangesAsync();
+            return movie.Id;
         }
     }
 }

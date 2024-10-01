@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace MovieApp.Handlers.User.Registration
+namespace MovieApp.Handlers.User.Create
 {
-    public class RegistrationUserRequest : IRequest
+    public class CreateUserRequest : IRequest
     {
         public string Email { get; set; } //не должно быть других челов с таким же логином
         public string Login { get; set; } //не должно быть других челов с таким же email

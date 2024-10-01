@@ -38,8 +38,8 @@ namespace MovieApp.Controllers
         [CustomAuthorizationFilter(isAdmin: true)]
         public async Task<IActionResult> Create([FromBody] CreateActorRequets requets)
         {
-            await MediatR.Send(requets);
-            return Created();
+            
+            return Ok(await MediatR.Send(requets));
         }
 
         [HttpPost("{actorId:guid}/Photo")]
@@ -55,8 +55,7 @@ namespace MovieApp.Controllers
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateActorRequest requets)
         {
             requets.Id = id;
-            await MediatR.Send(requets);
-            return Ok();
+            return Ok(await MediatR.Send(requets));
         }
 
         [HttpDelete("{id:guid}")]
@@ -66,7 +65,5 @@ namespace MovieApp.Controllers
             await MediatR.Send(requets);
             return Ok();
         }
-
-
     }
 }

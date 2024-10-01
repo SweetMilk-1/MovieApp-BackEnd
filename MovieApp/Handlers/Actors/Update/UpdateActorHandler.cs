@@ -7,7 +7,7 @@ using MovieApp.Infrastucture.Exceptions;
 
 namespace MovieApp.Handlers.Actors.Update
 {
-    public class UpdateActorHandler : IRequestHandler<UpdateActorRequest>
+    public class UpdateActorHandler : IRequestHandler<UpdateActorRequest, Guid>
     {
         IMapper _mapper;
         MovieAppDbContext _dbContext;
@@ -18,7 +18,7 @@ namespace MovieApp.Handlers.Actors.Update
             _mapper = mapper;
         }
 
-        public async Task Handle(UpdateActorRequest request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(UpdateActorRequest request, CancellationToken cancellationToken)
         {
             if (!await _dbContext.Actors.AnyAsync(x => x.Id == request.Id))
                 throw new BadRequestException($"Актер {request.Id} не найден");
@@ -28,6 +28,8 @@ namespace MovieApp.Handlers.Actors.Update
 
             _dbContext.Update(actor);
             await _dbContext.SaveChangesAsync();
+
+            return actor.Id;
         }
     }
 }

@@ -7,7 +7,7 @@ using MovieApp.Services.User;
 
 namespace MovieApp.Handlers.Movie.Update
 {
-    public class UpdateMovieHandler : IRequestHandler<UpdateMovieRequest>
+    public class UpdateMovieHandler : IRequestHandler<UpdateMovieRequest, Guid>
     {
         private readonly MovieAppDbContext _context;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace MovieApp.Handlers.Movie.Update
             _userInfoService = userInfoService;
         }
 
-        public async Task Handle(UpdateMovieRequest request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(UpdateMovieRequest request, CancellationToken cancellationToken)
         {
             var movie = 
                 await _context.Movies
@@ -51,6 +51,7 @@ namespace MovieApp.Handlers.Movie.Update
             }
 
             await _context.SaveChangesAsync();
+            return movie.Id;
         }
     }
 }

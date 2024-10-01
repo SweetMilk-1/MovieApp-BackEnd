@@ -3,7 +3,7 @@ using MovieApp.Models.Dto;
 
 namespace MovieApp.Handlers.Movie.Update
 {
-    public class UpdateMovieRequest : MovieDto, IRequest
+    public class UpdateMovieRequest : MovieDto, IRequest<Guid>
     {
 
     }

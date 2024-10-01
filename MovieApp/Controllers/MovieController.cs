@@ -39,13 +39,12 @@ namespace MovieApp.Controllers
         [CustomAuthorizationFilter]
         public async Task<IActionResult> Create([FromBody] CreateMovieRequest request)
         {
-            await MediatR.Send(request);
-            return Created();
+            return Ok(await MediatR.Send(request));
         }
 
         [HttpPost("{movieId:guid}/Photo")]
         [CustomAuthorizationFilter]
-        public async Task<IActionResult> Create(MovieUploadImageRequest request)
+        public async Task<IActionResult> UploadPhoto(MovieUploadImageRequest request)
         {
             await MediatR.Send(request);
             return Ok();
@@ -56,8 +55,7 @@ namespace MovieApp.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMovieRequest request)
         {
             request.Id = id;
-            await MediatR.Send(request);
-            return Created();
+            return Ok(await MediatR.Send(request));
         }
 
         [HttpDelete("{id:guid}")]

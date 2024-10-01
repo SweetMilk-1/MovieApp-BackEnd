@@ -2,12 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using MovieApp.Database;
 
-namespace MovieApp.Handlers.User.Registration
+namespace MovieApp.Handlers.User.Create
 {
-    public class RegistrationUserRequestValidator : AbstractValidator<RegistrationUserRequest>
+    public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
     {
         private readonly MovieAppDbContext _context;
-        public RegistrationUserRequestValidator(MovieAppDbContext context)
+        public CreateUserRequestValidator(MovieAppDbContext context)
         {
             _context = context;
 

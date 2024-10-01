@@ -3,15 +3,15 @@ using MovieApp.Database;
 using MovieApp.Services.Security;
 
 
-namespace MovieApp.Handlers.User.Registration
+namespace MovieApp.Handlers.User.Create
 {
-    internal class RegistrationUserHandler : IRequestHandler<RegistrationUserRequest>
+    internal class CreateUserHandler : IRequestHandler<CreateUserRequest>
     {
 
         private readonly MovieAppDbContext _dbContext;
         private readonly ICryptoService _cryptoService;
 
-        public RegistrationUserHandler(
+        public CreateUserHandler(
             MovieAppDbContext dbContext,
             ICryptoService cryptoService)
         {
@@ -19,7 +19,7 @@ namespace MovieApp.Handlers.User.Registration
             _cryptoService = cryptoService;
         }
 
-        public async Task Handle(RegistrationUserRequest request, CancellationToken cancellationToken)
+        public async Task Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             var user = new Database.Entities.User
             {
