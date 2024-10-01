@@ -7,5 +7,6 @@
         public string? Bio { get; set; }
         public IEnumerable<Movie> Movies { get; set; }
 
+        public string? ImagePath { get; set; }
     }
 }

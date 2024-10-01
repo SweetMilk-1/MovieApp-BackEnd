@@ -27,7 +27,7 @@ namespace MovieApp.Handlers.Movie.Update
                 .Include(x => x.Genres)
                 .FirstOrDefaultAsync(x => x.Id == request.Id) ?? throw new BadRequestException($"Фильм {request.Id} не найден");
 
-            if (movie.CreatedByUserId != _userInfoService.UserJwtInfoDto.UserId)
+            if (movie.CreatedByUserId != _userInfoService.UserJwtInfoDto.UserId || !_userInfoService.UserJwtInfoDto.IsAdmin)
             {
                 throw new BadRequestException($"Недостаточно прав");
             }

@@ -20,7 +20,7 @@ namespace MovieApp.Handlers.Movie.Delete
         {
             var movie = await _context.Movies.FindAsync(request.Id) ?? throw new BadRequestException($"Фильм {request.Id} не найден");
             
-            if (movie.CreatedByUserId != _userInfoService.UserJwtInfoDto?.UserId)
+            if (movie.CreatedByUserId != _userInfoService.UserJwtInfoDto?.UserId || !_userInfoService.UserJwtInfoDto.IsAdmin)
             {
                 throw new ForbiddenException($"Недостаточно прав");
             }

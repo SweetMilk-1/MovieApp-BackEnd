@@ -1,4 +1,5 @@
-﻿using MovieApp.Services.Security;
+﻿using MovieApp.Services.Files;
+using MovieApp.Services.Security;
 using MovieApp.Services.User;
 
 namespace MovieApp.Services
@@ -12,6 +13,7 @@ namespace MovieApp.Services
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<ISessionService, SessionService>();
             services.AddTransient<IUserInfoService, UserInfoService>();
+            services.AddTransient<IFileService, FileService>();
 
             return services;
         }

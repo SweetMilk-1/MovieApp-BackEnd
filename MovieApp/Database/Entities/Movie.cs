@@ -12,6 +12,7 @@
         public IEnumerable<Genre> Genres { get; set; }
         public Guid CreatedByUserId { get; set; }
         public User CreatedByUser { get; set; }
-        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow; 
+        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+        public string? ImagePath { get; set; }
     }
 }

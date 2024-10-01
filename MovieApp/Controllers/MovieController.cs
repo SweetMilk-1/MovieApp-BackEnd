@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieApp.Handlers.Actors.GetImage;
 using MovieApp.Handlers.Actors.Update;
 using MovieApp.Handlers.Movie.Create;
 using MovieApp.Handlers.Movie.Delete;
 using MovieApp.Handlers.Movie.Get;
+using MovieApp.Handlers.Movie.GetImage;
 using MovieApp.Handlers.Movie.GetList;
 using MovieApp.Handlers.Movie.Update;
+using MovieApp.Handlers.Movie.UploadImage;
 using MovieApp.Infrastucture.Controller;
 using MovieApp.Infrastucture.Controller.Auth;
 
@@ -20,6 +23,12 @@ namespace MovieApp.Controllers
             return Ok(await MediatR.Send(request));
         }
 
+        [HttpGet("{movieId:guid}/Photo")]
+        public async Task<IActionResult> GetPhoto([FromRoute] GetMovieImageRequest requets)
+        {
+            return File(await MediatR.Send(requets), "image/*");
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] GetMoviesListRequest request)
         {
@@ -32,6 +41,14 @@ namespace MovieApp.Controllers
         {
             await MediatR.Send(request);
             return Created();
+        }
+
+        [HttpPost("{movieId:guid}/Photo")]
+        [CustomAuthorizationFilter]
+        public async Task<IActionResult> Create(MovieUploadImageRequest request)
+        {
+            await MediatR.Send(request);
+            return Ok();
         }
 
         [HttpPut("{id:guid}")]

@@ -9,6 +9,6 @@
         public string Login { get; set; }
         public string PasswordHash { get; set; }
         public DateTime CreateDate { get; private set; } = DateTime.UtcNow;
-        public string? PhotoUrl { get; set; }
+        public string? ImagePath { get; set; }
     }
 }
