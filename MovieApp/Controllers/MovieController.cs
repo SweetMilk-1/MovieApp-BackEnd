@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MovieApp.Handlers.Actors.GetImage;
-using MovieApp.Handlers.Actors.Update;
+﻿using Microsoft.AspNetCore.Mvc;
 using MovieApp.Handlers.Movie.Create;
 using MovieApp.Handlers.Movie.Delete;
 using MovieApp.Handlers.Movie.Get;
@@ -30,6 +27,7 @@ namespace MovieApp.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorizationFilter]
         public async Task<IActionResult> GetList([FromQuery] GetMoviesListRequest request)
         {
             return Ok(await MediatR.Send(request));

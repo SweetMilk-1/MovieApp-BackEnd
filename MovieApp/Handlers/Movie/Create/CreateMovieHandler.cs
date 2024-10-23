@@ -35,8 +35,6 @@ namespace MovieApp.Handlers.Movie.Create
             movie.Actors = actors;
             movie.Genres = genres;
 
-            movie.CreatedByUserId = request.CreatedByUserId;
-
             _context.Add(movie);
 
             await _context.SaveChangesAsync();

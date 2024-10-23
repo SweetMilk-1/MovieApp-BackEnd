@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieApp.Handlers.User.Authentication;
 using MovieApp.Handlers.User.Create;
 using MovieApp.Handlers.User.Get;
 using MovieApp.Handlers.User.GetImage;
+using MovieApp.Handlers.User.RefreshTokens;
 using MovieApp.Handlers.User.UploadImage;
 using MovieApp.Infrastucture.Controller;
+using MovieApp.Models.Dto;
 
 namespace MovieApp.Controllers
 {
@@ -36,13 +37,17 @@ namespace MovieApp.Controllers
             return Ok(await MediatR.Send(request));
         }
 
+        [HttpPost("UpdateTokens")]
+        public async Task<IActionResult> UpdateTokens([FromQuery] RefreshTokensRequest request)
+        {
+            return Ok(await MediatR.Send(request));
+        }
+
         [HttpPost("UploadPhoto/{userId:guid}")]
         public async Task<IActionResult> UploadPhoto(UserUploadImageRequest request)
         {
             await MediatR.Send(request);
             return Ok();
         }
-
-
     }
 }

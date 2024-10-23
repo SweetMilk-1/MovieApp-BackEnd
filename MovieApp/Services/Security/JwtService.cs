@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Azure.Core;
+using Microsoft.IdentityModel.Tokens;
+using MovieApp.Infrastucture.Exceptions;
 using MovieApp.Models.Dto;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -43,6 +45,35 @@ namespace MovieApp.Services.Security
             var now = DateTime.UtcNow;
 
             return CreateToken(claims, expiredTime, now);
+        }
+
+        public Guid GetSessionIdFromRefreshToken(string refreshToken)
+        {
+            try
+            {
+                var handler = new JwtSecurityTokenHandler();
+
+                var jwtValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = _configuration.GetValue<string>("Security:Jwt:Issuer"),
+                    ValidateAudience = true,
+                    ValidAudience = _configuration.GetValue<string>("Security:Jwt:Audience"),
+                    ValidateLifetime = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                   _configuration.GetValue<string>("Security:Jwt:Key"))),
+                    ValidateIssuerSigningKey = true,
+                };
+
+                var claims = handler.ValidateToken(refreshToken, jwtValidationParameters, out SecurityToken securityToken);
+                var sessionId = claims?.FindFirstValue("SessionId");
+
+                return sessionId != null ? Guid.Parse(sessionId) : throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException("Некорректный токен. Необходима повторная авторизация");
+            }
         }
 
         private string CreateToken(List<Claim> claims, int expiredTime, DateTime now)

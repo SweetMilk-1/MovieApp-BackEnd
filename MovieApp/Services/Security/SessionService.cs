@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieApp.Database;
+using MovieApp.Database.Entities;
+using System.Linq;
 
 namespace MovieApp.Services.Security
 {
@@ -15,6 +17,19 @@ namespace MovieApp.Services.Security
         public async Task<Guid?> GetSessionId(Guid userId)
         {
             return (await _dbContext.UserSessions.FirstOrDefaultAsync(s => s.UserId == userId))?.SessionId;
+        }
+
+        public Task<Database.Entities.User?> GetUser(Guid sessionId)
+        {
+            return _dbContext.Users
+                .AsNoTracking()
+                .Join(_dbContext.UserSessions,
+                    x => x.Id,
+                    y => y.UserId,
+                    (x, y) => new { User = x, Session = y.SessionId })
+                .Where(x => x.Session == sessionId)
+                .Select(x => x.User)
+                .FirstOrDefaultAsync();
         }
 
         public async Task SetSessionId(Guid userId, Guid sessionId)

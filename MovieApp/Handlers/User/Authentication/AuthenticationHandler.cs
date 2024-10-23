@@ -2,11 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using MovieApp.Database;
 using MovieApp.Infrastucture.Exceptions;
+using MovieApp.Models.Dto;
 using MovieApp.Services.Security;
 
 namespace MovieApp.Handlers.User.Authentication
 {
-    public class AuthenticationHandler : IRequestHandler<AuthenticationRequest, AuthenticationResponse>
+    public class AuthenticationHandler : IRequestHandler<AuthenticationRequest, AuthTokensDto>
     {
         private readonly MovieAppDbContext _dbContext;
         private readonly IJwtService _jwtService;
@@ -21,7 +22,7 @@ namespace MovieApp.Handlers.User.Authentication
             _cryptoService = cryptoService;
         }
 
-        public async Task<AuthenticationResponse> Handle(AuthenticationRequest request, CancellationToken cancellationToken)
+        public async Task<AuthTokensDto> Handle(AuthenticationRequest request, CancellationToken cancellationToken)
         {
             var user = await _dbContext.Users.AsNoTracking()
                 .FirstOrDefaultAsync(x =>
@@ -39,7 +40,7 @@ namespace MovieApp.Handlers.User.Authentication
             var refreshToken = _jwtService.CreateRefreshToken(sessionId);
             await _sessionService.SetSessionId(user.Id, sessionId);
 
-            return new AuthenticationResponse
+            return new AuthTokensDto
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken

@@ -12,7 +12,7 @@ namespace MovieApp.Infrastucture.Controller.Auth
             {
                 if (claimsPrincipal.Identity?.IsAuthenticated == false)
                 {
-                    
+                    return null;
                 }
                 var userId = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
                 var login = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "Login").Value;

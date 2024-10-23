@@ -6,5 +6,6 @@ namespace MovieApp.Services.Security
     {
         string CreateAccessToken(UserJwtInfoDto userJwtInfo);
         string CreateRefreshToken(Guid sessionId);
+        Guid GetSessionIdFromRefreshToken(string refreshToken);
     }
 }
