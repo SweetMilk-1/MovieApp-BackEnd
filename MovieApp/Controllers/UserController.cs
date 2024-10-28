@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieApp.Handlers.User.Authentication;
 using MovieApp.Handlers.User.Create;
 using MovieApp.Handlers.User.Get;
 using MovieApp.Handlers.User.GetImage;
 using MovieApp.Handlers.User.RefreshTokens;
 using MovieApp.Handlers.User.UploadImage;
 using MovieApp.Infrastucture.Controller;
-using MovieApp.Models.Dto;
 
 namespace MovieApp.Controllers
 {

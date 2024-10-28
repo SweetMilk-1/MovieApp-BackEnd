@@ -1,7 +1,8 @@
-﻿namespace MovieApp.Handlers.User.Authentication
+﻿namespace MovieApp.Models.Dto
 {
     public class AuthTokensDto
     {
+        public Guid UserId { get; set; }
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
     }

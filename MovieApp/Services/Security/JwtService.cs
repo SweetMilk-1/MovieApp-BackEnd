@@ -28,9 +28,8 @@ namespace MovieApp.Services.Security
             };
 
             var expiredTime = _configuration.GetValue<int>("Security:Jwt:AccessExpiredTime");
-            var now = DateTime.UtcNow;
 
-            return CreateToken(claims, expiredTime, now);
+            return CreateToken(claims, expiredTime);
         }
 
         public string CreateRefreshToken(Guid sessionId)
@@ -42,9 +41,8 @@ namespace MovieApp.Services.Security
 
 
             var expiredTime = _configuration.GetValue<int>("Security:Jwt:RefreshExpiredTime");
-            var now = DateTime.UtcNow;
 
-            return CreateToken(claims, expiredTime, now);
+            return CreateToken(claims, expiredTime);
         }
 
         public Guid GetSessionIdFromRefreshToken(string refreshToken)
@@ -76,7 +74,7 @@ namespace MovieApp.Services.Security
             }
         }
 
-        private string CreateToken(List<Claim> claims, int expiredTime, DateTime now)
+        private string CreateToken(List<Claim> claims, int expiredTime)
         {
             var issuer = _configuration.GetValue<string>("Security:Jwt:Issuer");
             var audience = _configuration.GetValue<string>("Security:Jwt:Audience");
@@ -88,8 +86,7 @@ namespace MovieApp.Services.Security
             var jwt = new JwtSecurityToken(
                 issuer: issuer,
                 audience: audience,
-                notBefore: now,
-                expires: now.Add(TimeSpan.FromMinutes(expiredTime)),
+                expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(expiredTime)),
                 signingCredentials: signingCredentials,
                 claims: claims);
 

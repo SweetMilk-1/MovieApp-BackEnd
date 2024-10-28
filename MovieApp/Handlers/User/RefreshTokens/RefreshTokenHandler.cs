@@ -1,12 +1,8 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using MovieApp.Database;
-using MovieApp.Handlers.User.Authentication;
 using MovieApp.Infrastucture.Exceptions;
+using MovieApp.Models.Dto;
 using MovieApp.Services.Security;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
 namespace MovieApp.Handlers.User.RefreshTokens
 {
@@ -41,6 +37,7 @@ namespace MovieApp.Handlers.User.RefreshTokens
 
             return new AuthTokensDto
             {
+                UserId = user.Id,
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MovieApp.Database;
+using MovieApp.Database.Entities;
 using MovieApp.Infrastucture.Exceptions;
 using MovieApp.Models.Dto;
 using MovieApp.Services.Security;
@@ -42,6 +43,7 @@ namespace MovieApp.Handlers.User.Authentication
 
             return new AuthTokensDto
             {
+                UserId = user.Id,
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };

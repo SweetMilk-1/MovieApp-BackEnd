@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using MovieApp.Handlers.User.Authentication;
+using MovieApp.Models.Dto;
 
-namespace MovieApp.Models.Dto
+namespace MovieApp.Handlers.User.Authentication
 {
     public class AuthenticationRequest : IRequest<AuthTokensDto>
     {
