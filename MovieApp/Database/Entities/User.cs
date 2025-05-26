@@ -10,5 +10,7 @@
         public string PasswordHash { get; set; }
         public DateTime CreateDate { get; private set; } = DateTime.UtcNow;
         public string? ImagePath { get; set; }
+        public IEnumerable<Review> OwnReviews { get; set; }
+        public IEnumerable<Review> LikeReviews { get; set; }
     }
 }

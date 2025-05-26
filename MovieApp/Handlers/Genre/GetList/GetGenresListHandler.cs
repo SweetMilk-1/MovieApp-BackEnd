@@ -6,11 +6,11 @@ using MovieApp.Models.Common;
 
 namespace MovieApp.Handlers.Genre.GetList
 {
-    public class GetGenresListHandler : IRequestHandler<GetGenresListRequest, PagedListWrapper<DictionaryItemDto>>
+    public class GetReviewsHandler : IRequestHandler<GetGenresListRequest, PagedListWrapper<DictionaryItemDto>>
     { 
         private readonly MovieAppDbContext _dbContext;
         private readonly IMapper _mapper;
-        public GetGenresListHandler(MovieAppDbContext dbContext,
+        public GetReviewsHandler(MovieAppDbContext dbContext,
             IMapper mapper)
         {
             _dbContext = dbContext;

@@ -42,7 +42,7 @@ namespace MovieApp.Controllers
             return Ok(await MediatR.Send(requets));
         }
 
-        [HttpPost("{actorId:guid}/Photo")]
+        [HttpPost("{actorId:guid}/UploadPhoto")]
         [CustomAuthorizationFilter(isAdmin: true)]
         public async Task<IActionResult> UploadPhoto(ActorUploadImageRequest requets)
         {

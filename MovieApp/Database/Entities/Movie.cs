@@ -10,6 +10,7 @@
         public  DateTime ReleaseDate { get; set; }
         public IEnumerable<Actor> Actors { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
         public Guid CreatedByUserId { get; set; }
         public User CreatedByUser { get; set; }
         public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;

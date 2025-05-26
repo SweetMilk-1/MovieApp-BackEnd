@@ -4,6 +4,7 @@ using MovieApp.Handlers.Genre.Create;
 using MovieApp.Handlers.Genre.Delete;
 using MovieApp.Handlers.Genre.GetList;
 using MovieApp.Handlers.Genre.Update;
+using MovieApp.Handlers.Review.Delete;
 using MovieApp.Infrastucture.Controller;
 using MovieApp.Infrastucture.Controller.Auth;
 
