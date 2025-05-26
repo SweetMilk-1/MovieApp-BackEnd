@@ -8,6 +8,8 @@ namespace MovieApp.Models.Dto
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Title { get; set; }
         public string PgInfo { get; set; }
+
+        public double? Grade { get; set; }
         public DateTime ReleaseDate { get; set; }
         public IEnumerable<DictionaryItemDto> Genres { get; set; }
     }

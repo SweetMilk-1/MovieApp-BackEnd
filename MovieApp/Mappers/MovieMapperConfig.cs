@@ -7,7 +7,8 @@ namespace MovieApp.Mappers
     public class MovieMapperConfig : Profile
     {
         public MovieMapperConfig() {
-            CreateMap<Movie, MovieDto>();
+            CreateMap<Movie, MovieDto>()
+                .ForMember(x => x.Grade, opt => opt.MapFrom(y => y.Reviews.Average(x => x.Grade)));
 
             CreateMap<MovieDto, Movie>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
@@ -16,7 +17,8 @@ namespace MovieApp.Mappers
                 .ForMember(x => x.Genres, opt => opt.Ignore())
                 .ForMember(x => x.Actors, opt => opt.Ignore());
 
-            CreateMap<Movie, MovieItemDto>();
+            CreateMap<Movie, MovieItemDto>()
+                .ForMember(x => x.Grade, opt => opt.MapFrom(y => y.Reviews.Average(x => x.Grade)));
         }
     }
 }

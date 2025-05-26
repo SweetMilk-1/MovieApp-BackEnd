@@ -36,24 +36,6 @@ namespace MovieApp.Controllers
             return Created();
         }
 
-
-        [HttpPost]
-        [CustomAuthorizationFilter]
-        public async Task<IActionResult> Create([FromBody] CreateReviewRequest request)
-        {
-            await MediatR.Send(request);
-            return Created();
-        }
-
-
-        [HttpPost]
-        [CustomAuthorizationFilter]
-        public async Task<IActionResult> Create([FromBody] CreateReviewRequest request)
-        {
-            await MediatR.Send(request);
-            return Created();
-        }
-
         [HttpDelete("{id:guid}")]
         [CustomAuthorizationFilter]
         public async Task<IActionResult> Delete(DeleteReviewRequest request)
