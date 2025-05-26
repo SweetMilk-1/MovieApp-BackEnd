@@ -6,6 +6,7 @@ using MovieApp.Handlers.User.GetImage;
 using MovieApp.Handlers.User.RefreshTokens;
 using MovieApp.Handlers.User.UploadImage;
 using MovieApp.Infrastucture.Controller;
+using MovieApp.Infrastucture.Controller.Auth;
 
 namespace MovieApp.Controllers
 {
@@ -31,6 +32,14 @@ namespace MovieApp.Controllers
             return File(await MediatR.Send(request), "image/*");
         }
 
+        [HttpPost("{userId:guid}/UploadPhoto")]
+        [CustomAuthorizationFilter]
+        public async Task<IActionResult> UploadPhoto(UserUploadImageRequest request)
+        {
+            await MediatR.Send(request);
+            return Ok();
+        }
+
         [HttpPost("Authentication")]
         public async Task<IActionResult> Authentication([FromBody] AuthenticationRequest request)
         {
@@ -41,13 +50,6 @@ namespace MovieApp.Controllers
         public async Task<IActionResult> UpdateTokens([FromQuery] RefreshTokensRequest request)
         {
             return Ok(await MediatR.Send(request));
-        }
-
-        [HttpPost("UploadPhoto/{userId:guid}")]
-        public async Task<IActionResult> UploadPhoto(UserUploadImageRequest request)
-        {
-            await MediatR.Send(request);
-            return Ok();
         }
     }
 }

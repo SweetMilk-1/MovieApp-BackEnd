@@ -27,7 +27,6 @@ namespace MovieApp.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorizationFilter]
         public async Task<IActionResult> GetList([FromQuery] GetMoviesListRequest request)
         {
             return Ok(await MediatR.Send(request));
@@ -57,6 +56,7 @@ namespace MovieApp.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [CustomAuthorizationFilter]
         public async Task<IActionResult> Delete([FromRoute] DeleteMovieRequest request)
         {
             await MediatR.Send(request);
